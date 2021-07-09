@@ -39,9 +39,11 @@ until (jin.die? || villains.empty?) do
 
     allies.each do |ally|
         ally.attack(villains[rand(villains.size)]) if !ally.can_control
+        break if villains.empty?
         villains.each do |villain|
             villains.delete(villain) if villain.die? || villain.flee?
         end
+        break if villains.empty?
     end
 
     puts "\n"
