@@ -23,7 +23,7 @@ class Hero < Person
         if deflect_attack?
             puts "#{@name} deflects the attack"
         else
-            @hitpoint -= damage
+            super(damage)
         end
     end
 

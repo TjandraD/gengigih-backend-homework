@@ -22,4 +22,8 @@ class Villain < Person
     def flee?
         @fled
     end
+
+    def removed?
+        die? || flee?
+    end
 end
