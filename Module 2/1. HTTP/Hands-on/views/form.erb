@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<body>
+    <form action="/items" method="POST">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+
+        <label for="price">Price:</label><br>
+        <input type="number" id="price" name="price"><br>
+        <input type="submit" value="Submit">
+
+        <br><br><br>
+
+        <table border="1">
+            <tr>
+                <td>Name</td>
+                <td>Price</td>
+            </tr>
+            <% items.each do |item| %>
+                <td><%= item['name'] %></td>
+                <td><%= item['price'] %></td>
+            <% end %>
+        </table>
+</body>
+</html>
