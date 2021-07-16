@@ -1,0 +1,35 @@
+Exercise: Query
+
+Solution No. 1
+SELECT items.*, categories.name AS 'category name'
+FROM item_categories
+JOIN items ON items.id = item_categories.item_id
+JOIN categories ON categories.id = item_categories.category_id;
+
+Solution No. 2
+SELECT items.id, items.name
+FROM items
+JOIN item_categories ON items.id = item_categories.item_id
+JOIN categories ON categories.id = item_categories.category_id
+WHERE categories.name = 'main dish';
+
+Solution No. 3
+SELECT items.*
+FROM items
+JOIN item_categories ON item_categories.item_id = items.id
+JOIN categories ON categories.id = item_categories.category_id
+WHERE categories.name = 'main dish' AND items.price > 30000;
+
+Solution No. 4
+SELECT items.*
+FROM items
+JOIN item_categories ON item_categories.item_id = items.id
+JOIN categories ON categories.id = item_categories.category_id
+WHERE categories.id IS NULL;
+
+Solution No. 5
+SELECT categories.id, categories.name, GROUP_CONCAT(items.name), MAX(items.price)
+FROM categories
+LEFT JOIN item_categories ON item_categories.category_id = categories.id
+LEFT JOIN items ON items.id = item_categories.item_id
+GROUP BY categories.id;
