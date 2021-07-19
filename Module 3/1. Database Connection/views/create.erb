@@ -1,0 +1,13 @@
+<h1>Create New Item</h1>
+
+<form method="POST" action="/items/create">
+    <input name="name" type="text" placeholder="Item Name"><br><br>
+    <input name="price" type="number" placeholder="Item Price"><br><br>
+
+    <select name="category">
+        <% categories.each do |category| %>
+        <option value="<%= category.id %>"><%= category.name %></option>
+        <% end %>
+    </select><br><br>
+    <button type="submit">Add Item</button>
+</form>
