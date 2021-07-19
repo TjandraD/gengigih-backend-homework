@@ -1,13 +1,27 @@
-<h1>Create New Item</h1>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
 
-<form method="POST" action="/items/create">
-    <input name="name" type="text" placeholder="Item Name"><br><br>
-    <input name="price" type="number" placeholder="Item Price"><br><br>
+<body>
+    <div class="container py-3">
+        <h1>Create New Item</h1>
 
-    <select name="category">
-        <% categories.each do |category| %>
-        <option value="<%= category.id %>"><%= category.name %></option>
-        <% end %>
-    </select><br><br>
-    <button type="submit">Add Item</button>
-</form>
+        <form method="POST" action="/items/create">
+            <div class="mb-3">
+                <label for="exampleInputName" class="form-label">Item Name</label>
+                <input type="text" name="name" class="form-control" id="exampleInputEmail">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPrice" class="form-label">Item Price</label>
+                <input type="number" name="price" class="form-control" id="exampleInputPrice">
+            </div>
+
+            <select class="form-select" name="category" aria-label="Default select example">
+                <% categories.each do |category| %>
+                <option value="<%= category.id %>"><%= category.name %></option>
+                <% end %>
+            </select><br><br>
+            <button type="submit">Add Item</button>
+        </form>
+    </div>
+</body>
