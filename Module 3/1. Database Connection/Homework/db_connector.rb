@@ -104,5 +104,5 @@ end
 def delete_item(id)
     client = create_db_client
     client.query("DELETE FROM item_categories WHERE item_id = #{id}")
-    # client.query("DELETE FROM items WHERE id = #{id}")
+    client.query("DELETE FROM items WHERE id = #{id}")
 end
