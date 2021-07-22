@@ -6,7 +6,7 @@
     <div class="container py-3">
         <h1>Edit Item</h1>
 
-        <form method="PUT" action="/items/edit/<%= item.id %>">
+        <form method="POST" action="/items/edit/<%= item.id %>">
             <div class="mb-3">
                 <label for="exampleInputName" class="form-label">Item Name</label>
                 <input type="text" name="name" class="form-control" value="<%= item.name %>">
