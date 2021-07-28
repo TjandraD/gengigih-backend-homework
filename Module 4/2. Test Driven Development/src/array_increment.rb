@@ -25,8 +25,15 @@ class ArrayIncrement
         if @second_num >= 10
             @second_num -= 10
             @first_num += 1
+
+            if @first_num >= 10
+                @first_num -= 9
+                @third_num = 0
+    
+                return [@first_num, @second_num, @third_num]
+            end
+
+            return [@first_num, @second_num]
         end
-        
-        response = [@first_num, @second_num]
     end
 end
