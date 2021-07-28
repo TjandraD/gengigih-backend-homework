@@ -1,39 +1,33 @@
 class ArrayIncrement
     def initialize(params)
-        @first_num = params[0]
-        @second_num = params[1]
-        @third_num = params[2]
+        @array = params
     end
 
     def return_array
-        if (@third_num.nil?)
-            two_inputs
-        else
-            three_inputs
-        end
-    end
+        @array.each_with_index do |number, index|
+            next if index != (@array.length - 1)
+            number += 1
+            @array[index] = number
 
-    def three_inputs
-        @third_num += 1
-        
-        response = [@first_num, @second_num, @third_num]
-    end
-
-    def two_inputs
-        @second_num += 1
-
-        if @second_num >= 10
-            @second_num -= 10
-            @first_num += 1
-
-            if @first_num >= 10
-                @first_num -= 9
-                @third_num = 0
-    
-                return [@first_num, @second_num, @third_num]
+            if number >= 10
+                @more_than_ten = true
+                @num_position = index
             end
+        end
 
-            return [@first_num, @second_num]
+        array_formatter if @more_than_ten
+
+        return @array
+    end
+
+    def array_formatter
+        @next_position = @num_position - 1
+        @array[@next_position] += 1
+        @array[@num_position] -= 10
+
+        if @array[@next_position] >= 10
+            @array[@next_position] -= 9
+            @array[@array.length] = 0
         end
     end
 end
