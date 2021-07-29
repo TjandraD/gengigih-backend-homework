@@ -1,8 +1,4 @@
 require_relative '../src/string_transformer'
-require 'rspec'
-require 'simplecov'
-
-SimpleCov.start
 
 RSpec.describe StringTransformer do
     it 'returns k if passed b' do
