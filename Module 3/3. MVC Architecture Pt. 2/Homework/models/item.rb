@@ -16,7 +16,7 @@ class Item
         rawData = client.query("SELECT * FROM items ORDER BY id ASC")
         items = Array.new
         rawData.each do |data|
-            item = Item.new({id: data["id"], id: data["name"], id: data["price"]})
+            item = Item.new({id: data["id"], name: data["name"], price: data["price"]})
             items.push(item)
         end
         items
@@ -43,19 +43,32 @@ class Item
         item
     end
     
-    def self.get_items_with_categories()
+    def self.get_items_with_categories
         client = create_db_client
-        rawData = client.query(
-            "SELECT i.id, i.name, i.price, c.id AS \'category_id\', GROUP_CONCAT(c.name) AS \'category_name\'
-            FROM items i
-            LEFT JOIN item_categories ic ON i.id = ic.item_id
-            JOIN categories c ON c.id = ic.category_id
-            GROUP BY ic.category_id, i.id
-            ORDER BY i.id ASC")
+        rawItemData = client.query(
+            "SELECT *
+            FROM items
+            ORDER BY id ASC")
+
         items = Array.new
-        rawData.each do |data|
-            category = Category.new({id: data["category_id"], name: data["category_name"]})
-            item = Item.new({id: data["id"], name: data["name"], price: data["price"], category: category})
+        rawItemData.each do |data|
+            rawCategoryData = client.query(
+                "SELECT c.name AS \'category_name'\
+                FROM item_categories ic
+                JOIN categories c ON c.id = ic.category_id
+                WHERE item_id = #{data["id"]}"
+            )
+
+            categories = "No category"
+            rawCategoryData.each do |category|
+                if categories == "No category"
+                    categories = category["category_name"]
+                    next
+                end
+                categories += ", #{category["category_name"]}"
+            end
+
+            item = Item.new({id: data["id"], name: data["name"], price: data["price"], category: categories})
             items.push(item)
         end
         items
