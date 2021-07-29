@@ -88,3 +88,10 @@ get '/items/delete/:id' do
 
     redirect '/'
 end
+
+get '/categories/delete/:id' do
+    controller = CategoryController.new
+    controller.delete_category({id: params["id"]})
+
+    redirect '/'
+end

@@ -56,4 +56,10 @@ class Category
         @name = data["name"]
         @items = items
     end
+
+    def delete
+        client = create_db_client
+        client.query("DELETE FROM item_categories WHERE category_id=#{@id}")
+        client.query("DELETE FROM categories WHERE id=#{@id}")
+    end
 end

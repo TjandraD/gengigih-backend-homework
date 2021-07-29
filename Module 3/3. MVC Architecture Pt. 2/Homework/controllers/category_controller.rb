@@ -31,4 +31,9 @@ class CategoryController
         renderer = ERB.new(File.read("./views/category_details.erb"))
         renderer.result(binding)
     end
+
+    def delete_category(params)
+        category = Category.new(params)
+        category.delete
+    end
 end
