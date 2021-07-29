@@ -1,4 +1,7 @@
 require_relative '../src/array_increment'
+require 'simplecov'
+
+SimpleCov.start
 
 RSpec.describe ArrayIncrement do
     it 'should returns [5, 6, 2] when given [5, 6, 1]' do
