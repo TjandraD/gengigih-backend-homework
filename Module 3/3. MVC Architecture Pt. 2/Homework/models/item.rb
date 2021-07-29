@@ -30,16 +30,28 @@ class Item
     def get_item_with_category()
         client = create_db_client
         rawData = client.query(
-            "SELECT i.id, i.name, i.price, GROUP_CONCAT(c.id) AS \'category_id\', GROUP_CONCAT(c.name SEPARATOR ' ') AS \'category_name\'
-            FROM items i
-            JOIN item_categories ic ON i.id = ic.item_id
+            "SELECT *
+            FROM items
+            WHERE id = #{@id}")
+        
+        rawCategoryData = client.query(
+            "SELECT c.name AS \'category_name'\
+            FROM item_categories ic
             JOIN categories c ON c.id = ic.category_id
-            WHERE i.id = #{@id}
-            GROUP BY ic.category_id")
+            WHERE item_id = #{@id}"
+        )
+
+        categories = "No category"
+        rawCategoryData.each do |category|
+            if categories == "No category"
+                categories = category["category_name"]
+                next
+            end
+            categories += ", #{category["category_name"]}"
+        end
     
         data = rawData.first()
-        category = Category.new({id: data["category_id"], name: data["category_name"]})
-        item = Item.new({id: data["id"], name: data["name"], price: data["price"], category: category})
+        item = Item.new({id: data["id"], name: data["name"], price: data["price"], category: categories})
         item
     end
     
