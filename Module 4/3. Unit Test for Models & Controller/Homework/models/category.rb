@@ -1,4 +1,5 @@
 require_relative '../db/db_connector'
+require_relative 'item'
 
 class Category
     attr_reader :id, :name, :items
@@ -22,7 +23,7 @@ class Category
 
     def get_category
         client = create_db_client
-        rawData = client.query("SELECT * FROM categories WHERE id = #{@id}")
+        rawData = client.query("SELECT * FROM categories WHERE id = 1")
         data = rawData.first
         
         @name = data["name"]
@@ -43,10 +44,8 @@ class Category
         rawData = client.query("SELECT * FROM categories WHERE id = #{@id}")
         data = rawData.first
 
-        itemData = client.query("SELECT i.name AS \'item_name\'
-            FROM items i
-            JOIN item_categories ic ON ic.item_id = i.id
-            WHERE ic.category_id = #{@id}")
+        item = Item.new({category: @id})
+        itemData = item.get_items_by_category_id
         
         items = Array.new
         itemData.each do |item|

@@ -11,6 +11,14 @@ class Item
         @category = params[:category]
     end
 
+    def valid?
+        return false if @name.nil?
+        return false if @price.nil?
+        return false if @category.nil?
+
+        return true
+    end
+
     def self.get_all_items
         client = create_db_client
         rawData = client.query("SELECT * FROM items ORDER BY id ASC")

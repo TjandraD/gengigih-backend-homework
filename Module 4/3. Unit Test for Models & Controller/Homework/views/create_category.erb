@@ -4,14 +4,14 @@
 
 <body>
     <div class="container py-3">
-        <h1>Edit Category</h1>
+        <h1>Create New Category</h1>
 
-        <form method="POST" action="/categories/edit/<%= category.id %>">
+        <form method="POST" action="/categories/new">
             <div class="mb-3">
                 <label for="exampleInputName" class="form-label">Category Name</label>
-                <input type="text" name="name" class="form-control" value="<%= category.name %>">
-            </div><br><br>
-            <button type="submit">Edit Category</button>
+                <input type="text" name="name" class="form-control" id="exampleInputEmail">
+            </div>
+            <button type="submit">Add Category</button>
         </form>
     </div>
 </body>
