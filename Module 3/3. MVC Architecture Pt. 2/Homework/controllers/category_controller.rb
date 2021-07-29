@@ -20,4 +20,12 @@ class CategoryController
         category = Category.new(params)
         category.insert_category
     end
+
+    def category_details(params)
+        category = Category.new(params)
+        category.get_category_with_items
+
+        renderer = ERB.new(File.read("./views/category_details.erb"))
+        renderer.result(binding)
+    end
 end

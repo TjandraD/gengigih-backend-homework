@@ -47,6 +47,18 @@ get '/items/edit/:id' do
     controller.edit_item_form({id: item_id})
 end
 
+get '/categories/details/:id' do
+    category_id = params["id"]
+    controller = CategoryController.new
+    controller.category_details({id: category_id})
+end
+
+get '/categories/edit/:id' do
+    item_id = params["id"]
+    controller = ItemController.new
+    controller.edit_item_form({id: item_id})
+end
+
 post '/items/edit/:id' do
     id = params["id"]
     name = params["name"]
