@@ -6,22 +6,12 @@
     <div class="container py-3">
         <h1>Edit Category</h1>
 
-        <form method="POST" action="/items/edit/<%= category.id %>">
+        <form method="POST" action="/categories/edit/<%= category.id %>">
             <div class="mb-3">
-                <label for="exampleInputName" class="form-label">Item Name</label>
-                <input type="text" name="name" class="form-control" value="<%= item.name %>">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPrice" class="form-label">Item Price</label>
-                <input type="number" name="price" class="form-control" value="<%= item.price %>">
-            </div>
-
-            <select class="form-select" name="category" aria-label="Default select example">
-                <% categories.each do |category| %>
-                <option <% if item.category.id == category.id %>selected<% end %> value="<%= category.id %>"><%= category.name %></option>
-                <% end %>
-            </select><br><br>
-            <button type="submit">Edit Item</button>
+                <label for="exampleInputName" class="form-label">Category Name</label>
+                <input type="text" name="name" class="form-control" value="<%= category.name %>">
+            </div><br><br>
+            <button type="submit">Edit Category</button>
         </form>
     </div>
 </body>

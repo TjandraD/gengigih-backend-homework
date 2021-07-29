@@ -20,6 +20,14 @@ class Category
         categories
     end
 
+    def get_category
+        client = create_db_client
+        rawData = client.query("SELECT * FROM categories WHERE id = #{@id}")
+        data = rawData.first
+        
+        @name = data["name"]
+    end
+
     def insert_category
         client = create_db_client
         client.query("INSERT INTO categories(name) VALUES ('#{@name}')")
@@ -27,7 +35,7 @@ class Category
 
     def update_category
         client = create_db_client
-        client.query("UPDATE categories SET name = '#{@name}'")
+        client.query("UPDATE categories SET name = '#{@name}' WHERE id=#{@id}")
     end
 
     def get_category_with_items

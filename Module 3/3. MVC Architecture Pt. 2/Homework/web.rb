@@ -41,19 +41,13 @@ get '/items/details/:id' do
     controller.item_details({id: item_id})
 end
 
-get '/items/edit/:id' do
-    item_id = params["id"]
-    controller = ItemController.new
-    controller.edit_item_form({id: item_id})
-end
-
 get '/categories/details/:id' do
     category_id = params["id"]
     controller = CategoryController.new
     controller.category_details({id: category_id})
 end
 
-get '/categories/edit/:id' do
+get '/items/edit/:id' do
     item_id = params["id"]
     controller = ItemController.new
     controller.edit_item_form({id: item_id})
@@ -70,6 +64,23 @@ post '/items/edit/:id' do
 
     redirect '/'
 end
+
+get '/categories/edit/:id' do
+    item_id = params["id"]
+    controller = CategoryController.new
+    controller.edit_category_form({id: item_id})
+end
+
+post '/categories/edit/:id' do
+    id = params["id"]
+    name = params["name"]
+
+    controller = CategoryController.new
+    controller.edit_category({id: id, name: name})
+
+    redirect '/'
+end
+
 
 get '/items/delete/:id' do
     controller = ItemController.new

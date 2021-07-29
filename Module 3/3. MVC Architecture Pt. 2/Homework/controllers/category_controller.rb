@@ -11,14 +11,17 @@ class CategoryController
         category.insert_category
     end
 
-    def edit_category_form
+    def edit_category_form(params)
+        category = Category.new(params)
+        category.get_category
+
         renderer = ERB.new(File.read("./views/edit_category.erb"))
         renderer.result(binding)
     end
 
     def edit_category(params)
         category = Category.new(params)
-        category.insert_category
+        category.update_category
     end
 
     def category_details(params)
