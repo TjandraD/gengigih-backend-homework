@@ -22,24 +22,11 @@ class Item
         items
     end
 
-    def insert_item()
-        client = create_db_client
-        client.query("INSERT INTO items(name, price) VALUES('#{@name}', #{@price})")
-    end
-
     def get_item_with_category()
         client = create_db_client
-        rawData = client.query(
-            "SELECT *
-            FROM items
-            WHERE id = #{@id}")
+        rawData = client.query("SELECT * FROM items WHERE id = #{@id}")
         
-        rawCategoryData = client.query(
-            "SELECT c.name AS \'category_name'\
-            FROM item_categories ic
-            JOIN categories c ON c.id = ic.category_id
-            WHERE item_id = #{@id}"
-        )
+        rawCategoryData = client.query("SELECT c.name AS \'category_name'\ FROM item_categories ic JOIN categories c ON c.id = ic.category_id WHERE item_id = #{@id}")
 
         categories = "No category"
         rawCategoryData.each do |category|
@@ -57,19 +44,11 @@ class Item
     
     def self.get_items_with_categories
         client = create_db_client
-        rawItemData = client.query(
-            "SELECT *
-            FROM items
-            ORDER BY id ASC")
+        rawItemData = client.query("SELECT * FROM items ORDER BY id ASC")
 
         items = Array.new
         rawItemData.each do |data|
-            rawCategoryData = client.query(
-                "SELECT c.name AS \'category_name'\
-                FROM item_categories ic
-                JOIN categories c ON c.id = ic.category_id
-                WHERE item_id = #{data["id"]}"
-            )
+            rawCategoryData = client.query("SELECT c.name AS \'category_name'\ FROM item_categories ic JOIN categories c ON c.id = ic.category_id WHERE item_id = #{data["id"]}")
 
             categories = "No category"
             rawCategoryData.each do |category|
@@ -109,9 +88,6 @@ class Item
 
     def get_items_by_category_id
         client = create_db_client
-        items = client.query("SELECT i.name AS \'item_name\'
-            FROM items i
-            JOIN item_categories ic ON ic.item_id = i.id
-            WHERE ic.category_id = #{@category}")
+        items = client.query("SELECT i.name AS \'item_name\' FROM items i JOIN item_categories ic ON ic.item_id = i.id WHERE ic.category_id = #{@category}")
     end
 end
