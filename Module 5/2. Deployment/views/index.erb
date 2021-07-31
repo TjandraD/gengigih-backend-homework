@@ -1,0 +1,71 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container py-3">
+        <h1>List Items</h1>
+        <a class="btn btn-primary" href="/items/new" role="button">New Item</a>
+
+        <br><br>
+        <table border=1 class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% items.each do |item| %>
+                <tr>
+                    <td scope="row"><%= item.id %></td>
+                    <td><%= item.name %></td>
+                    <td><%= item.price %></td>
+                    <td><%= item.category %></td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <a class="btn btn-primary" href="/items/details/<%= item.id %>" role="button">Show</a>
+                            <a class="btn btn-secondary" href="/items/edit/<%= item.id %>" role="button">Edit</a>
+                            <a class="btn btn-danger" href="/items/delete/<%= item.id %>" role="button">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container py-3">
+        <h1>List Categories</h1>
+        <a class="btn btn-primary" href="/categories/new" role="button">New Category</a>
+
+        <br><br>
+        <table border=1 class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% categories.each do |category| %>
+                <tr>
+                    <td scope="row"><%= category.id %></td>
+                    <td><%= category.name %></td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <a class="btn btn-primary" href="/categories/details/<%= category.id %>" role="button">Show</a>
+                            <a class="btn btn-secondary" href="/categories/edit/<%= category.id %>" role="button">Edit</a>
+                            <a class="btn btn-danger" href="/categories/delete/<%= category.id %>" role="button">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</body>
