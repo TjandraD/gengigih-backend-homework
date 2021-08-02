@@ -28,7 +28,7 @@ describe Item do
                 stub_category_params = [{"id": 1, "name": "Something", "price": 2000}]
 
                 expect(@mock_client).to receive(:query).with(mock_query_items).and_return(stub_category_params)
-                expect(@mock_client).to receive(:query).with(mock_query_categories).and_return([])
+                expect(@mock_client).to receive(:query).with(mock_query_categories).and_return([{"category_name" => "Something"}, {"category_name" => "Another"}])
 
                 @item.get_item_with_category
             end
@@ -41,7 +41,7 @@ describe Item do
                 stub_category_params = [{"id": 1, "name": "Something", "price": 2000}]
 
                 expect(@mock_client).to receive(:query).with(mock_query_items).and_return(stub_category_params)
-                expect(@mock_client).to receive(:query).with(mock_query_categories).and_return([])
+                expect(@mock_client).to receive(:query).with(mock_query_categories).and_return([{"category_name" => "Something"}, {"category_name" => "Another"}])
 
                 @item = Item.get_items_with_categories
             end
