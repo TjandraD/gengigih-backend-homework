@@ -1,0 +1,10 @@
+- hosts: all
+  tasks:
+    - name: Download node setup script
+      get_url:
+        url: https://deb.nodesource.com/setup_12.x
+        dest: /tmp/node_setup.sh
+        mode: '0755'
+    - name: Execute node setup script
+      become: yes
+      command: bash /tmp/node_setup.sh
