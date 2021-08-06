@@ -16,11 +16,13 @@
     args:
       chdir: app/
   - name: Extract app bundle
-    command: tar -xvzf build.tgz
-    command: rm -rf build.tgz
+    command: >
+      tar -xvzf build.tgz
+      rm -rf build.tgz
     args:
       chdir: app/
   - name: Run Sinatra application
     become: true
-    command: sudo systemctl stop sinatra.service
-    command: sudo systemctl start sinatra.service
+    command: >
+      sudo systemctl stop sinatra.service
+      sudo systemctl start sinatra.service
