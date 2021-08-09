@@ -1,0 +1,36 @@
+- name: Run local command
+  hosts: localhost
+  tasks:
+  - name: Remove existing app bundle
+    command: rm -rf build/build.tgz
+  - name: Export MySQL database
+    command: mysqldump -u tjandra food_oms_db > food_oms_db.sql
+  - name: Create application bundle
+    command: tar --exclude='./.git' -zcvf build/build.tgz .
+  - name: Copy bundle to VM
+    command: scp -i .vagrant/machines/default/virtualbox/private_key build/build.tgz vagrant@192.168.20.21:/home/vagrant/app
+
+- name: Run server command
+  hosts: server01
+  tasks:
+  - name: Delete all existing files
+    command: rm -rf * !(build.tgz)
+    args:
+      chdir: app/
+  - name: Extract app bundle
+    command: >
+      tar -xvzf build.tgz
+      rm -rf build.tgz
+    args:
+      chdir: app/
+  - name: Install all required dependencies
+    command: bundle install
+  - name: Import MySQL database
+    command: mysql -u tjandra food_oms_db < food_oms_db.sql
+    args:
+      chdir: app/
+  - name: Run Sinatra application
+    become: true
+    command: >
+      sudo systemctl stop sinatra.service
+      sudo systemctl start sinatra.service
