@@ -8,4 +8,4 @@ install:
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_b96ef1820594_key -iv $encrypted_b96ef1820594_iv -in rsa_gigih.enc -out ~/.ssh/rsa_gigih -d
-- chmod 400 ~/.ssh/id_rsa
+- chmod 400 ~/.ssh/rsa_gigih
