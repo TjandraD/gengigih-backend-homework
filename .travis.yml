@@ -1,9 +1,11 @@
 language: python
+
 python:
 - '2.7'
+
 install:
 - pip install ansible
+
 before_install:
-- openssl aes-256-cbc -K $encrypted_6bbf849eb73b_key -iv $encrypted_6bbf849eb73b_iv
-  -in id_rsa.enc -out ~\/.ssh/id_rsa -d
+- openssl aes-256-cbc -K $encrypted_b96ef1820594_key -iv $encrypted_b96ef1820594_iv -in rsa_gigih.enc -out ~/.ssh/rsa_gigih -d
 - chmod 400 ~/.ssh/id_rsa
